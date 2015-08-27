@@ -1,0 +1,11 @@
+
+
+
+## Does this work?
+
+    console.log \poop
+
+    main = (x) -> 5
+
+    module.exports = main
+
