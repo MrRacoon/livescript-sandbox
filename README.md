@@ -11,7 +11,12 @@ play9ing around with livescript.
 
 ### Make Commands
 
-**Make Commands**
+**Make the sandbox**
 
 `make`
 
+**Make the sandbox, and open firefox**
+
+`make test`
+
+**Clean the repo**

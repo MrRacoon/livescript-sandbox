@@ -10,7 +10,6 @@
   "license": "BSD-2-Clause",
   "devDependencies": {
     "livescript": "~1.4.0",
-    "coffee-script": "~1.9.3",
     "prelude-ls": "~1.1.2"
   }
 }

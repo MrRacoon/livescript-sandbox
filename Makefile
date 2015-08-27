@@ -1,30 +1,54 @@
 .DEFAULT_GOAL := main
 
-SOURCE = ./src
+SRC = ./src
 DEST   = ./dest
+NODE_MODULES = ./node_modules
 
 compile_livescript:
-	lsc -b -c src/*.ls  -o ${DEST}/js || echo "no ls files"
-	lsc -b -c src/*.lls -o ${DEST}/js || echo "no lls files"
+	@echo ""
+	@echo "Compile all livescript"
+	lsc -b -r prelude-ls -c $(SRC)/*.ls -o ${DEST}/js
 
-src:
-	vim $(SOURCE)
+init:
+	@echo ""
+	@echo "ensure the dest folder is availible"
+	mkdir -p $(DEST)
+	@echo ""
+	@echo "install all npm dependencies"
+	npm install
 
 clean:
-	$(RM) -rf $(DEST)/*
+	@echo ""
+	@echo "remove dest and node_modules"
+	$(RM) -r $(DEST)
+	$(RM) -r $(NODE_MODULES)
 
 concat:
-	# Remove old (or interfering) index.js
+	@echo ""
+	@echo "Remove old (or interfering) index.js"
 	$(RM) $(DEST)/index.js
+	@echo ""
+	@echo "Concat all js files int index.js"
 	cat ${DEST}/js/*.js > ${DEST}/index.js
 
 move_index_html:
+	@echo ""
+	@echo "Copy index.html"
 	cp ./src/index.html ./dest/
 
 open_firefox:
-	firefox $(DEST)/index.html
+	@echo ""
+	@echo "opening firefox"
+	firefox $(DEST)/index.html 2> /dev/null
 
-main: clean move_index_html compile_livescript concat
+open_chrome:
+	@echo ""
+	@echo "opening google-chrome"
+	google-chrome $(DEST)/index.html 2> /dev/null &
 
-test: main open_firefox
+main: init move_index_html compile_livescript concat
+
+recompile: clean main
+
+test: main open_chrome
 
