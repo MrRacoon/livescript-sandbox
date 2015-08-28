@@ -7,7 +7,7 @@ NODE_MODULES = ./node_modules
 compile_livescript:
 	@echo ""
 	@echo "Compile all livescript"
-	lsc -b -r prelude-ls -c $(SRC)/*.ls -o ${DEST}/js
+	lsc -b -c $(SRC)/*.ls -o ${DEST}/js
 
 init:
 	@echo ""
@@ -40,6 +40,9 @@ open_firefox:
 	@echo ""
 	@echo "opening firefox"
 	firefox $(DEST)/index.html 2> /dev/null
+
+watch:
+	lsc -cw $(SRC)/index.ls -o $(DEST)
 
 open_chrome:
 	@echo ""
