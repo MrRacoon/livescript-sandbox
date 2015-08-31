@@ -31,10 +31,11 @@ concat:
 	@echo "Concat all js files int index.js"
 	cat ${DEST}/js/*.js > ${DEST}/index.js
 
-move_index_html:
+move_static:
 	@echo ""
 	@echo "Copy index.html"
 	cp ./src/index.html ./dest/
+	cp ./src/style.css ./dest/
 
 open_firefox:
 	@echo ""
